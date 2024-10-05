@@ -50,9 +50,9 @@ func main() {
 	godotenv.Load()
 
 	serviceAccountPath := ".keys/serviceAccountKey.json"
-	userCollection := "gccdpune-user"
-	pingCollection := "gccdpune-go-pings"
-	pollCollection := "gccdpune-poll"
+	userCollection := "devfest-chennai-user"
+	pingCollection := "devfest-chennai-pings"
+	pollCollection := "devfest-chennai-poll"
 
 	ctx := context.Background()
 
@@ -299,7 +299,7 @@ func updateConversationSummary(pollSummary string) {
 }
 
 func generateResponse(ctx context.Context, userMessage, conversationSummary string) (string, error) {
-	requestText := fmt.Sprintf("You're Amitabh Bachchan, hosting Kaun Banega Crorepati. Current status:\n%s\nUser said: %s\nRespond in Amitabh's style, max 30 words. Be witty and professional. Do not say anything that can be taken as abusive.", conversationSummary, userMessage)
+	requestText := fmt.Sprintf("Always reply in English. You're Amitabh Bachchan, hosting Kaun Banega Crorepati. Current status:\n%s\nUser said: %s\nRespond in Amitabh's style, max 30 words. Be witty and professional. Do not say anything that can be taken as abusive.", conversationSummary, userMessage)
 
 	resp, err := model.Generate(ctx,
 		ai.NewGenerateRequest(
