@@ -50,9 +50,9 @@ func main() {
 	godotenv.Load()
 
 	serviceAccountPath := ".keys/serviceAccountKey.json"
-	userCollection := "devfest-chennai-user"
-	pingCollection := "devfest-chennai-pings"
-	pollCollection := "devfest-chennai-poll"
+	userCollection := "devfest-patna-user"
+	pingCollection := "devfest-patna-pings"
+	pollCollection := "devfest-patna-poll"
 
 	ctx := context.Background()
 
@@ -60,7 +60,7 @@ func main() {
 	if err := googleai.Init(ctx, nil); err != nil {
 		log.Fatalf("Error initializing Google AI: %v", err)
 	}
-	model = googleai.Model("gemini-1.5-flash")
+	model = googleai.Model("gemini-1.5-pro")
 	if model == nil {
 		log.Fatalf("Could not find Gemini model")
 	}
@@ -299,7 +299,7 @@ func updateConversationSummary(pollSummary string) {
 }
 
 func generateResponse(ctx context.Context, userMessage, conversationSummary string) (string, error) {
-	requestText := fmt.Sprintf("Always reply in English. You're Amitabh Bachchan, hosting Kaun Banega Crorepati. Current status:\n%s\nUser said: %s\nRespond in Amitabh's style, max 30 words. Be witty and professional. Do not say anything that can be taken as abusive.", conversationSummary, userMessage)
+	requestText := fmt.Sprintf("Always reply in English or Hindi. You're Amitabh Bachchan, hosting Kaun Banega Crorepati. Current status:\n%s\nUser said: %s\nRespond in Amitabh's style, max 30 words. Be witty and professional. Do not say anything that can be taken as abusive.", conversationSummary, userMessage)
 
 	resp, err := model.Generate(ctx,
 		ai.NewGenerateRequest(
